@@ -26,15 +26,17 @@ const addCart=(id) =>{
    let duplicate= cart.find(item => item.id === id);
    if(duplicate)
    {
-       alert("product added before")
+         duplicate.qty = duplicate.qty+1;
+    
    }
    else{
     const cartProduct = data.find((product)=>product.id === id);
     //   console.log(cartProduct);
-        cart.push(cartProduct)
+        
+        cart.push({...cartProduct, qty: 1})
       
    }
-
+   console.log(cart);
   update()
 }
 
@@ -47,22 +49,29 @@ const showCart=()=>{
     // console.log(cartElement.innerHTML);
     cartElement.innerHTML = null;
     cart.forEach((item)=>{
+        console.log(item.qty);
         cartElement.innerHTML += `
         <table>
         <tr>
           <td>
             <div class="card cart-card">
+            <span class="cart-qty">${item.qty}</span>
               <img src="${item.img}" />
             </div>
           </td>
           <td>${item.name}</td>
           <td>BDT:${item.price}</td>
-          <td><i class="fa fa-trash" aria-hidden="true"></i></td>
+          <td><i class="fa fa-trash" aria-hidden="true" onClick="removeCart(${item.id})"></i></td>
         </tr>
       </table>
         `
     })
 }
 
+
+const removeCart=(id)=>{
+   cart = cart.filter(item=>item.id !== id);
+   update();
+}
 
 
