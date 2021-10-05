@@ -52,3 +52,35 @@ footer{
     border: none;
     border-radius: 5px;
 }
+
+
+/* cart */
+
+.right{
+    margin-top:20px;
+}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+  }
+  
+  td {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+  }
+
+  .cart-card{
+      height: 6rem;
+      width: 6rem;
+  }
+
+  .cart-card img{
+      height: 6rem;
+  }
+
+
+  
+ 
