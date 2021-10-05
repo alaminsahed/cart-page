@@ -1,6 +1,8 @@
 const cardElement = document.querySelector(".card-container");
 const cartElement = document.querySelector(".cart-products");
+const priceElement = document.querySelector(".total-price");
 
+//fetch data to show in UI
 const fetchData =()=>{
     data.forEach((product)=>{
         cardElement.innerHTML += `
@@ -20,6 +22,7 @@ const fetchData =()=>{
 
 fetchData();
 
+// cart functionality
 let cart=[];
 
 const addCart=(id) =>{
@@ -31,25 +34,29 @@ const addCart=(id) =>{
    }
    else{
     const cartProduct = data.find((product)=>product.id === id);
-    //   console.log(cartProduct);
+    
         
         cart.push({...cartProduct, qty: 1})
       
    }
-   console.log(cart);
+
   update()
 }
 
+// when state change to the cart update the present data
+
 const update=()=>{
     showCart();
+    subtotal();
       
 }
 
+//show cart data in UI
 const showCart=()=>{
     // console.log(cartElement.innerHTML);
     cartElement.innerHTML = null;
     cart.forEach((item)=>{
-        console.log(item.qty);
+       
         cartElement.innerHTML += `
         <table>
         <tr>
@@ -68,10 +75,28 @@ const showCart=()=>{
     })
 }
 
-
+//remove product from cart
 const removeCart=(id)=>{
    cart = cart.filter(item=>item.id !== id);
    update();
 }
+
+//subtotal
+
+const subtotal= () =>{
+    let total = 0;
+    cart.map(item=>{
+        total += item.price * item.qty;
+    })
+   priceElement.innerHTML = `
+   <p>Discount: <span>BDT00</span></p>
+   <p>Subtotal: <span>BDT${total}</span></p>
+   <p>Tax(0%): <span>BDT00</span></p>
+   <p>Total: <span>BDT</span></p>
+   <button class="price-btn">PAY <span>BDT${total}</span></button>
+   `
+}
+
+
 
 
